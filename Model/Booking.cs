@@ -8,6 +8,9 @@ namespace Hotel_Management.Model
 {
     public class Booking
     {
+        
+        public int BookingId { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -22,25 +25,25 @@ namespace Hotel_Management.Model
 
         public string Provience { get; set; }
 
-        [DataType(DataType.PostalCode)]
+        
         public string ZipCode { get; set; }
 
-        [Key]
         [Required]
-        [DataType(DataType.PhoneNumber)]
         public string Phone_Number { get; set; }
+
+        
+        public string PhotoFileName { get; set; }
 
         [Required]
         public string RoomType { get; set; }
 
         [Required]
+        public string SmokingRoom { get; set; }
+
+
+        public string LeasePocketWIFI { get; set; }
+
         
-        public string SmookingRoom { get; set; }
-
-        [DataType(DataType.Upload)]
-        public string PhotoFileName { get; set; }
-
-        public string SpecialNotes { get; set; }
 
     }
 }

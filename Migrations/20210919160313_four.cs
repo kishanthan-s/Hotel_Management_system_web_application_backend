@@ -3,10 +3,34 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hotel_Management.Migrations
 {
-    public partial class newa : Migration
+    public partial class four : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Booking",
+                columns: table => new
+                {
+                    BookingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Provience = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone_Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhotoFileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoomType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SmokingRoom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LeasePocketWIFI = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booking", x => x.BookingId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
@@ -37,6 +61,9 @@ namespace Hotel_Management.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Booking");
+
             migrationBuilder.DropTable(
                 name: "Customers");
         }

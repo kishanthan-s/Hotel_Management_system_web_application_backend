@@ -34,6 +34,7 @@ namespace Hotel_Management
         {
             services.AddControllers();
             services.AddDbContext<Databasecontext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Databasecontext")));
+    
             services.AddIdentity<Customer, IdentityRole>().AddEntityFrameworkStores<Databasecontext>();
            
             var mappingConfig = new MapperConfiguration(c =>
@@ -43,8 +44,9 @@ namespace Hotel_Management
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            
 
-           
+
 
 
 
@@ -67,11 +69,19 @@ namespace Hotel_Management
                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
                        };
                    });
+            services.AddCors();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod
+             ().AllowAnyHeader());
+            //app.UseCors(a => a.SetIsOriginAllowed(x => _ = true).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
