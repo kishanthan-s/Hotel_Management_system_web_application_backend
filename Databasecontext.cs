@@ -23,7 +23,9 @@ namespace Hotel_Management
 
         public DbSet<Booking> Booking { get; set; }
 
-        
+        public DbSet<ImageModel> Images { get; set; }
+
+
 
 
 

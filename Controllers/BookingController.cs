@@ -4,20 +4,23 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGeneration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Hotel_Management.Controllers
 {
+    //you changed the entity frame work
 
 
     [Route("api/[Controller]")]
     [ApiController]
     public class BookingController : ControllerBase
     {
-
+       
         private readonly Databasecontext _context;
 
         public BookingController(Databasecontext context)
@@ -25,7 +28,21 @@ namespace Hotel_Management.Controllers
             _context = context;
         }
 
+        //new controller for get
+        [HttpGet]
+        public async Task<List<Booking>> GetAllBooks()
+        {
+            var data = await _context.Booking.ToListAsync();
 
+            if (data == null)
+            {
+                
+            }
+
+            return data;
+
+        }
+        
 
 
         //[HttpGet("test")]
@@ -34,11 +51,11 @@ namespace Hotel_Management.Controllers
         //    return "Hellow ";
         // }
 
-        //[HttpGet]
-        //  public async Task<ActionResult<IEnumerable<Booking>>> GetBookings(string Phone_Number)
+        // [HttpGet]
+        //  public async Task<ActionResult<IEnumerable<Booking>>> GetBookings(int id)
         // {
-        //      return await _context.Bookings.Where(x => x.Phone_Number == Phone_Number).ToListAsync();
-        //  }
+        //      return await _context.Booking.Where(x => x.BookingId == id).ToListAsync();
+        // }
 
 
 
@@ -153,6 +170,9 @@ namespace Hotel_Management.Controllers
         // POST: api/booking
 
         // GET: api/TodoItems/5
+
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Booking>> GetBooking(int id)
         {
