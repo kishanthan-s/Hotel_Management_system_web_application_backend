@@ -42,7 +42,23 @@ namespace Hotel_Management.Controllers
             return data;
 
         }
-        
+
+
+
+        [HttpGet("test/{photoFileName}")]
+        public ActionResult<List<Booking>> GetAllBooking(string photoFileName)
+        {
+            var dataa = _context.Booking.Where(m => m.PhotoFileName == photoFileName).ToList();
+
+            if (dataa == null)
+            {
+
+            }
+
+            return new JsonResult(dataa);
+
+        }
+
 
 
         //[HttpGet("test")]

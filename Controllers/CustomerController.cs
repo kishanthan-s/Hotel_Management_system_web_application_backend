@@ -20,14 +20,43 @@ namespace Hotel_Management.Controllers
     {
         private IMapper mapper;
         private UserManager<Customer> userManager;
+         private readonly Databasecontext _context;
 
-        public CustomerController(IMapper mapper, UserManager<Customer>userManager)
+        public CustomerController(IMapper mapper, UserManager<Customer>userManager, Databasecontext context)
         {
 
             this.mapper = mapper;
             this.userManager = userManager;
+            _context = context;
         }
-      
+
+
+        [HttpGet("{email}")]
+        public  ActionResult GetCustomer(String email)
+        {
+            //try {
+                var customer_email = _context.Customers.Where(m => m.Email == email).FirstOrDefault();
+                var emails = customer_email.Id;
+
+
+                if (customer_email == null)
+                {
+
+                }
+
+                return new JsonResult(emails);
+
+           // }
+           // catch
+            //{
+            //    return ("Invalid username or password");
+            //}
+           
+        }
+
+
+
+
         [Authorize]
         [HttpGet("test")]
         public string test()

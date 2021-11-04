@@ -25,9 +25,6 @@ namespace Hotel_Management
 
         public DbSet<ImageModel> Images { get; set; }
 
-
-
-
-
+        
     }
 }
