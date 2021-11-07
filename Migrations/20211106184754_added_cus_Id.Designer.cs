@@ -4,14 +4,16 @@ using Hotel_Management;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hotel_Management.Migrations
 {
     [DbContext(typeof(Databasecontext))]
-    partial class DatabasecontextModelSnapshot : ModelSnapshot
+    [Migration("20211106184754_added_cus_Id")]
+    partial class added_cus_Id
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

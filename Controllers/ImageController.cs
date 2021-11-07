@@ -31,13 +31,14 @@ namespace Hotel_Management.Controllers
 
 
     
-        [HttpPost]
-        public IActionResult UploadImage()
+        [HttpPost("{cus_ID}")]
+        public IActionResult UploadImage(string cus_ID)
         {
             foreach (var file in Request.Form.Files)
             {
                 ImageModel img = new ImageModel();
                 img.ImageTitle = file.FileName;
+                img.Customer_ID = cus_ID;
 
                 MemoryStream ms = new MemoryStream();
                 file.CopyTo(ms);
@@ -93,6 +94,39 @@ namespace Hotel_Management.Controllers
            
         }
 
+        [HttpGet("test/{cus_ID}")]
+        public  ActionResult Images_cus(string cus_ID)
+        {
+            var dataa = _context.Images.Where(m => m.Customer_ID == cus_ID).FirstOrDefault();
+
+            if (dataa == null)
+            {
+                return Unauthorized("no image");
+            }
+            else
+            {
+                Byte[] profilePicture = _context.Images
+                                 .Where(p => p.Customer_ID == cus_ID)
+                                 .Select(p => p.ImageData)
+                                 .FirstOrDefault();
+                return File(profilePicture, "image/png");
+
+              // var img = _context.Images.OrderByDescending
+             //   (i => i.Customer_ID).FirstOrDefault();
+             //   string imageBase64Data =
+              //  Convert.ToBase64String(img.ImageData);
+              ///  string imageDataURL =
+             //    string.Format("data:image/jpg;base64,{0}",
+              //   imageBase64Data);
+             //  ViewBag.ImageTitle = img.ImageTitle;
+             //   ViewBag.ImageDataUrl = imageDataURL;
+              //  return imageDataURL;
+
+            }
+
+            
+
+        }
 
 
 
